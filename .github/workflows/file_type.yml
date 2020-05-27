@@ -26,22 +26,10 @@ jobs:
       run: echo Hello, world!
 
     # Runs a set of commands using the runners shell
-    - name: Get changed files
-      run: | 
-        file_names=`git diff-tree --no-commit-id --name-only -r ${{ github.sha }}`
-        echo $file_names
-      env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-    - id: file_changes
+
+    - id: Get all file changes
       uses: trilom/file-changes-action@v1.2.3
-    - name: test
+    - name: List all file changes
       run: |
-        cat $HOME/files.json
-        cat $HOME/files_modified.json
-        cat $HOME/files_added.json
-        cat $HOME/files_removed.json
         echo '${{ steps.file_changes.outputs.files}}'
-        echo '${{ steps.file_changes.outputs.files_modified}}'
-        echo '${{ steps.file_changes.outputs.files_added}}'
-        echo '${{ steps.file_changes.outputs.files_removed}}'
 
