@@ -32,9 +32,10 @@ jobs:
     - name: List all file changes
       run: |
         all_files_arr=${{ steps.file_changes.outputs.files}}
-        echo "All Files : "$all_files_arr
+        echo "All files below :"
+        echo $all_files_arr|tr -d "[]\"" |tr "," "\n"
         php_file_count=`echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep -c "\.php$" || true`
-        if [ -z "$php_file_count" ];then
+        if [ "$php_file_count"  -eq "0" ];then
               echo "No PHP files found, skipping image creation."
         else
               echo "PHP files found, starting image creation."
