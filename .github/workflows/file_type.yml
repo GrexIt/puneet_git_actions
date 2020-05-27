@@ -31,7 +31,8 @@ jobs:
       uses: trilom/file-changes-action@v1.2.3
     - name: List all file changes
       run: |
-        all_files_arr=$(echo '[".github/workflows/file_type.yml"]')
+        echo '${{ steps.file_changes.outputs.files}}'|tr -d "[]\"" |tr "," "\n"|grep "\.php$"
+        all_files_arr=$(echo '${{ steps.file_changes.outputs.files}}')
         echo $all_files_arr
         echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep "\.php$"
         php_files=`echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep "\.php$"`
