@@ -32,7 +32,6 @@ jobs:
     - name: List all file changes
       run: |
         all_files_arr=`echo '${{ steps.file_changes.outputs.files}}'`
-        echo "All Files : "$all_files_arr
         echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep "\.php$"
         php_files=`echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep "\.php$"`
         echo "PHP Files : "$php_files
