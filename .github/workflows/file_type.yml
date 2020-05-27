@@ -29,5 +29,5 @@ jobs:
     - name: Get changed files 
       run: | 
         file_names=`git diff-tree --no-commit-id --name-only -r ${{ github.sha }}`
-        echo file_names
+        echo $file_names
 
