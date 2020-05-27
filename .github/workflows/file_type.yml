@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: File_types
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -26,8 +26,8 @@ jobs:
       run: echo Hello, world!
 
     # Runs a set of commands using the runners shell
-    - name: Changed Files Exporter
-      uses: futuratrepadeira/changed-files@v3.1.0
-      with:
-        repo-token: ${{ github.token }}
-        pattern: '^.*\.(md|markdown)$'
+    - name: Get changed files 
+      run: | 
+        git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }}
+        echo "Done."
+
