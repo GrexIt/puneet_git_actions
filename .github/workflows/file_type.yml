@@ -33,6 +33,7 @@ jobs:
       run: |
         all_files_arr=`echo '${{ steps.file_changes.outputs.files}}'`
         echo "All Files : "$all_files_arr
+        echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep "\.php$"
         php_files=`echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep "\.php$"`
         echo "PHP Files : "$php_files
         php_file_count=`echo $php_files|wc -l`
