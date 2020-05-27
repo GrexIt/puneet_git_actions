@@ -31,5 +31,5 @@ jobs:
       uses: trilom/file-changes-action@v1.2.3
     - name: List all file changes
       run: |
-        echo "Hello,World"|tr "," "\n"
+        echo '${{ steps.file_changes.outputs.files}}'|tr -d "[]\"" |tr "," "\n"|grep "\.php$"
 
