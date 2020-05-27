@@ -31,5 +31,11 @@ jobs:
       uses: trilom/file-changes-action@v1.2.3
     - name: List all file changes
       run: |
-        echo '${{ steps.file_changes.outputs.files}}'|tr -d "[]\"" |tr "," "\n"|grep "\.php$"
-
+        all_files_arr=${{ steps.file_changes.outputs.files}}
+        echo "All Files : "$all_files_arr
+        php_file_count=`echo $all_files_arr|tr -d "[]\"" |tr "," "\n"|grep -c "\.php$" || true`
+        if [ -z "$php_file_count" ];then
+              echo "No PHP files found, skipping image creation."
+        else
+              echo "PHP files found, starting image creation."
+        fi
