@@ -28,5 +28,6 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Get changed files 
       run: | 
-        git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+        file_names=`git diff-tree --no-commit-id --name-only -r ${{ github.sha }}`
+        echo file_names
 
